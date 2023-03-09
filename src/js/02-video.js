@@ -18,11 +18,13 @@ const savePlayTime = throttle(e => {
 
 player.on('timeupdate', savePlayTime);
 
-try {
-  const currentTimeInSeconds = JSON.parse(
-    localStorage.getItem(LOCALSTORAGE_KEY_CURRENT_TIME_VIDEO)
-  ).seconds;
-  player.setCurrentTime(currentTimeInSeconds);
-} catch (error) {
-  console.error('Get state error:', error.stack);
+if (localStorage.getItem(LOCALSTORAGE_KEY_CURRENT_TIME_VIDEO)) {
+  try {
+    const currentTimeInSeconds = JSON.parse(
+      localStorage.getItem(LOCALSTORAGE_KEY_CURRENT_TIME_VIDEO)
+    ).seconds;
+    player.setCurrentTime(currentTimeInSeconds);
+  } catch (error) {
+    console.error('Get state error:', error.stack);
+  }
 }
