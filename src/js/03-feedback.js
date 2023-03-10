@@ -5,21 +5,13 @@ const feedbackForm = document.querySelector('.feedback-form');
 const feedbackFormEmail = document.querySelector("input[type='email']");
 const feedbackFormMessage = document.querySelector("textarea[name='message']");
 
-const setFeedbackState = throttle(e => {
-  if (!e.currentTarget) {
-    return;
-  }
-
-  const {
-    elements: { email, message },
-  } = e.currentTarget;
-
+const setFeedbackState = throttle(() => {
   try {
     localStorage.setItem(
       LOCALSTORAGE_KEY_FEEDBACK_STATE,
       JSON.stringify({
-        email: email.value,
-        message: message.value,
+        email: feedbackFormEmail.value,
+        message: feedbackFormMessage.value,
       })
     );
   } catch (error) {
